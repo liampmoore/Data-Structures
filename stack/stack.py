@@ -12,25 +12,6 @@ return elements in Last In First Out order.
 """
 
 
-class Stack():
-    def __init__(self):
-        self.size = 0
-        self.storage = []
-
-    def __len__(self):
-        return self.size
-
-    def push(self, value):
-        self.storage.append(value)
-        self.size += 1
-
-    def pop(self):
-        if self.size > 0:
-            self.size -= 1
-            return self.storage.pop()
-        else: return None
-# from ..linked_list import LinkedList
-
 # class Stack():
 #     def __init__(self):
 #         self.size = 0
@@ -44,5 +25,30 @@ class Stack():
 #         self.size += 1
 
 #     def pop(self):
-#         self.storage.pop()
-#         self.size -= 1
+#         if self.size > 0:
+#             self.size -= 1
+#             return self.storage.pop()
+#         else: return None
+import sys
+import os
+sys.path.append(os.path.abspath('../singly_linked_list'))
+from singly_linked_list import LinkedList
+
+class Stack(LinkedList):
+    def __init__(self):
+        super().__init__()
+        self.size = 0
+        
+
+    def __len__(self):
+        return self.size
+
+    def push(self, value):
+        self.add_to_tail(value)
+        self.size += 1
+
+    def pop(self):
+        if self.size > 0:
+            self.size -= 1
+            return self.remove_tail()
+        else: return None
