@@ -9,6 +9,12 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+import sys
+import os
+sys.path.append(os.path.abspath('../doubly_linked_list'))
+from doubly_linked_list import DoublyLinkedList, ListNode
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -78,19 +84,21 @@ class BSTNode:
     def for_each(self, fn):
         if self.left:
             self.left.for_each(fn)
-        fn(self.value)
         if self.right:
             self.right.for_each(fn)
+        fn(self.value)
+        
     
     # iterative
-    # ?????
+    # def for_each(self, fn):
+    #     pass
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        node.for_each(print)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
