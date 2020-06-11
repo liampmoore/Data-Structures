@@ -146,23 +146,23 @@ class BSTNode:
 
     def bft_print(self, node):
         # Create the queue and add the first node
-        node_queue = Queue()
-        node_queue.enqueue(node)
+        print_queue = Queue()
+        print_queue.enqueue(node)
 
         # While the queue is greater than zero
-        while node_queue.size > 0:
+        while print_queue.size > 0:
 
             # The current node equals the first item in the queue, and the item is removed from the front of the queue
-            current_node = node_queue.dequeue()
+            current_node = print_queue.dequeue()
             # Do whatever it is you must do to the node, visit, check for base condition, execute callback, modify value, etc.
             print(current_node.value)
 
             # If there is a left node add it to the end of the queue
             if current_node.left:
-                node_queue.enqueue(current_node.left)
+                print_queue.enqueue(current_node.left)
             # If there is a right node add it to the end of the queue
             if current_node.right:
-                node_queue.enqueue(current_node.right)
+                print_queue.enqueue(current_node.right)
             
             # Now the next node in the current row will be up first in the queue
             # and the next row will be lined up in order from left to right after the items in the current row
@@ -173,23 +173,23 @@ class BSTNode:
     # in an iterative depth first traversal
     def dft_print(self, node):
         # Create the stack and add the first node
-        node_stack = Stack()
-        node_stack.push(node)
+        print_stack = Stack()
+        print_stack.push(node)
 
         # While the stack length is greater than zero
-        while node_stack.size > 0:
+        while print_stack.size > 0:
 
             # Change the current node to node on the top/end of the stack, and remove that node from the top of the stack
-            current_node = node_stack.pop()
+            current_node = print_stack.pop()
             # Do whatever it is you must do to the node, visit, check for base condition, execute callback, modify value, etc.
             print(current_node.value)
 
             # If there is a left node add it to the top of the stack
             if current_node.left:
-                node_stack.push(current_node.left)
+                print_stack.push(current_node.left)
             # If there is a right node add it to the top of the stack
             if current_node.right:
-                node_stack.push(current_node.right)
+                print_stack.push(current_node.right)
 
             # Now the left node beneath the current node will be up next, on top of the stack
             # and if that first node has another node to the left below it, that will be placed on the stack
