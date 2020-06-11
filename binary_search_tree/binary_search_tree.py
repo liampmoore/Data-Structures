@@ -12,8 +12,45 @@ This part of the project comprises two days:
 
 import sys
 import os
-sys.path.append(os.path.abspath('../doubly_linked_list'))
-from doubly_linked_list import DoublyLinkedList, ListNode
+sys.path.append(os.path.abspath('../singly_linked_list'))
+from singly_linked_list import LinkedList
+
+class Queue(LinkedList):
+    def __init__(self):
+        super().__init__()
+        self.size = 0
+    
+    def __len__(self):
+        return self.size
+
+    def enqueue(self, value):
+        self.add_to_tail(value)
+        self.size += 1
+
+    def dequeue(self):
+        if self.size > 0:
+            self.size -= 1
+            return self.remove_head()
+        else: return None
+
+class Stack(LinkedList):
+    def __init__(self):
+        super().__init__()
+        self.size = 0
+        
+
+    def __len__(self):
+        return self.size
+
+    def push(self, value):
+        self.add_to_tail(value)
+        self.size += 1
+
+    def pop(self):
+        if self.size > 0:
+            self.size -= 1
+            return self.remove_tail()
+        else: return None
 
 class BSTNode:
     def __init__(self, value):
@@ -98,17 +135,40 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        node.for_each(print)
+        if node.left:
+            node.left.in_order_print(node.left)
+        print(self.value)
+        if node.right:
+            node.right.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
-        pass
+        node_queue = Queue()
+        node_queue.enqueue(node)
+        while node_queue.size > 0:
+            current_node = node_queue.dequeue()
+            print(current_node.value)
+            if current_node.left:
+                node_queue.enqueue(current_node.left)
+            if current_node.right:
+                node_queue.enqueue(current_node.right)
+
+            
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        node_stack = Stack()
+        node_stack.push(node)
+        while node_stack.size > 0:
+            current_node = node_stack.pop()
+            print(current_node.value)
+            if current_node.left:
+                node_stack.push(current_node.left)
+            if current_node.right:
+                node_stack.push(current_node.right)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
