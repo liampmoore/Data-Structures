@@ -45,7 +45,6 @@ class Stack:
         self.head = None
         self.tail = None
         self.size = 0
-        self.storage = LinkedList()
 
     def __len__(self):
         return self.size
