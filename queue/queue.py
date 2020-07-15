@@ -38,21 +38,62 @@ from singly_linked_list import LinkedList
 #             self.size -= 1
 #             return self.storage.pop(0)
 
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = LinkedList()
+
+#     def __len__(self):
+#         return self.size
+
+#     def enqueue(self, value):
+#         self.size += 1
+#         self.storage.add_to_tail(value)
+
+#     def dequeue(self):
+#         if self.size == 0:
+#             return None
+#         else:
+#             self.size -= 1
+#             return self.storage.remove_head()
+
+class Node:
+    def __init__(self, value, next_node = None):
+        self.value = value
+        self.next = next_node
+
 class Queue:
     def __init__(self):
         self.size = 0
-        self.storage = LinkedList()
+        self.head = None
+        self.tail = None
 
     def __len__(self):
         return self.size
-
+        
     def enqueue(self, value):
+        if not self.head:
+            self.head = Node(value)
+            self.tail = self.head
+        elif self.head is self.tail:
+            self.head.next = Node(value)
+            self.tail = self.head.next
+        else:
+            self.tail.next = Node(value)
+            self.tail = self.tail.next
         self.size += 1
-        self.storage.add_to_tail(value)
 
     def dequeue(self):
+        value = None
         if self.size == 0:
             return None
         else:
             self.size -= 1
-            return self.storage.remove_head()
+            if self.head is self.tail:
+                value = self.head.value
+                self.head = None
+                self.tail = None
+            else:
+                value = self.head.value
+                self.head = self.head.next
+            return value
